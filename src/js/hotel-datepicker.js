@@ -504,7 +504,7 @@ export default class HotelDatepicker {
 					}
 
 					if (this.priceDatesUsed) {
-						for (let priceindex = 0; priceindex <= this.priceDates.length; priceindex++) {
+						for (let priceindex = 0; priceindex < this.priceDates.length; priceindex++) {
 							if (this.priceDates[priceindex].date === dateString) {
 								price = this.priceDates[priceindex].price;
 								break;

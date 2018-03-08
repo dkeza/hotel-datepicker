@@ -518,7 +518,7 @@ HotelDatepicker.prototype.createMonthDomString = function createMonthDomString (
 				}
 
 				if (this$1.priceDatesUsed) {
-					for (var priceindex = 0; priceindex <= this.priceDates.length; priceindex++) {
+					for (var priceindex = 0; priceindex < this.priceDates.length; priceindex++) {
 						if (this$1.priceDates[priceindex].date === dateString) {
 							price = this$1.priceDates[priceindex].price;
 							break;
