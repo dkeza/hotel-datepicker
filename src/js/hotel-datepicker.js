@@ -31,6 +31,9 @@ export default class HotelDatepicker {
 		this.autoClose = opts.autoClose === undefined ? true : opts.autoClose;
 		this.showTopbar = opts.showTopbar === undefined ? true : opts.showTopbar;
 		this.moveBothMonths = opts.moveBothMonths || false;
+		this.priceDates = opts.priceDates || [];
+		this.priceDatesUsed = this.priceDates.length > 0;
+		this.priceCurrency = opts.priceCurrency || '€';
 		this.i18n = opts.i18n || {
 			selected: 'Your stay:',
 			night: 'Night',
@@ -460,6 +463,8 @@ export default class HotelDatepicker {
 				let isNoCheckIn = false;
 				let isNoCheckOut = false;
 				let isDayOfWeekDisabled = false;
+				let datePrice = '';
+				let price = 0.00;
 
                 // Check if the day is one of the days passed in the
                 // (optional) disabledDates option. And set valid to
@@ -497,6 +502,16 @@ export default class HotelDatepicker {
 							isNoCheckOut = true;
 						}
 					}
+
+					if (this.priceDatesUsed) {
+						for (let priceindex = 0; priceindex <= this.priceDates.length; priceindex++) {
+							if (this.priceDates[priceindex].date === dateString) {
+								price = this.priceDates[priceindex].price;
+								break;
+							}
+						}
+					}
+
 				}
 
 				const classes = [
@@ -536,8 +551,11 @@ export default class HotelDatepicker {
 					dayAttributes.title = title;
 				}
 
+				// Add price on date, if available
+				datePrice = this.priceDatesUsed ? '<br>' + price + this.priceCurrency : '';
+
                 // Create the day HTML
-				html += '<td class="datepicker__month-day ' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + '</td>';
+				html += '<td class="datepicker__month-day ' + dayAttributes.class + '" ' + this.printAttributes(dayAttributes) + '>' + _day.day + datePrice + '</td>';
 			}
 
 			html += '</tr>';
@@ -810,13 +828,32 @@ export default class HotelDatepicker {
 
         // If both dates are set, show the count and set the value of our input
 		if (this.start && this.end) {
+			
 			const count = this.countDays(this.end, this.start) - 1;
+			let sumPrice = 0.00;
+
+			// Calculate sum price for selected days
+			if (this.priceDatesUsed) {
+				let firstDay = new Date(parseInt(this.start, 10));
+				for (let oneDayIndex=0; oneDayIndex < count; oneDayIndex++) {
+					let oneDay = new Date(firstDay.getTime() + (86400000 * oneDayIndex));
+					let oneDayString = this.getDateString(oneDay, 'YYYY-MM-DD');
+					for (let priceindex = 0; priceindex < this.priceDates.length; priceindex++) {
+						if (this.priceDates[priceindex].date === oneDayString) {
+							sumPrice = sumPrice + this.priceDates[priceindex].price;
+							break;
+						}
+					}
+				};
+			}
+
 			const countText = count === 1 ? count + ' ' + this.lang('night') : count + ' ' + this.lang('nights');
+			const priceText = (this.priceDatesUsed ? ' - ' + sumPrice + this.priceCurrency : '');
 			const dateRangeValue = this.getDateString(new Date(this.start)) + this.separator + this.getDateString(new Date(this.end));
 
             // Show count
 			elSelected.style.display = '';
-			elSelected.firstElementChild.textContent = countText;
+			elSelected.firstElementChild.textContent = countText + priceText;
 			closeButton.disabled = false;
 
             // Set input value
