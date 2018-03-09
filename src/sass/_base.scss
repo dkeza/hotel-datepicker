@@ -11,16 +11,26 @@
 
 	@include mq_s {
 		width: 300px;
+		.datepicker__month-day {
+			font-size: 11px;
+		}
 	}
 
 	@include mq_m {
 		width: 460px;
+		.datepicker__month-day {
+			font-size: 8px;
+		}
 	}
 
 	@include mq_l {
 		width: 560px;
+		.datepicker__month-day {
+			font-size: 10px;
+		}
 	}
 }
+
 
 .datepicker__inner {
 	overflow: hidden;

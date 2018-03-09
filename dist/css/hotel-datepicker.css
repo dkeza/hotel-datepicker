@@ -2,16 +2,48 @@
  * BASE STYLES
  * ============================================================*/
 .datepicker {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
   position: absolute;
   width: 260px;
   z-index: 1;
 }
 
+@media (min-width: 320px) {
+  .datepicker {
+    width: 300px;
+  }
+  .datepicker .datepicker__month-day {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 480px) {
+  .datepicker {
+    width: 460px;
+  }
+  .datepicker .datepicker__month-day {
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .datepicker {
+    width: 560px;
+  }
+  .datepicker .datepicker__month-day {
+    font-size: 10px;
+  }
+}
+
 .datepicker__inner {
   overflow: hidden;
+}
+
+@media (min-width: 480px) {
+  .datepicker__months {
+    overflow: hidden;
+  }
 }
 
 .datepicker__month {
@@ -20,8 +52,33 @@
   width: 100%;
 }
 
+@media (min-width: 480px) {
+  .datepicker__month {
+    width: 200px;
+  }
+}
+
+@media (min-width: 768px) {
+  .datepicker__month {
+    width: 240px;
+  }
+}
+
+@media (min-width: 480px) {
+  .datepicker__month--month1 {
+    float: left;
+  }
+}
+
 .datepicker__month--month2 {
   display: none;
+}
+
+@media (min-width: 480px) {
+  .datepicker__month--month2 {
+    display: table;
+    float: right;
+  }
 }
 
 .datepicker__month-day--valid {
@@ -35,6 +92,12 @@
 
 .datepicker__month-button {
   cursor: pointer;
+}
+
+@media (min-width: 480px) {
+  .datepicker__month-button--disabled {
+    visibility: hidden;
+  }
 }
 
 .datepicker__info--feedback {
@@ -60,8 +123,7 @@
 .datepicker {
   background-color: #fff;
   border-radius: 5px;
-  -webkit-box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
-          box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
+  box-shadow: 8px 8px 40px 5px rgba(0, 0, 0, 0.08);
   color: #484c55;
   font-family: 'Helvetica', 'Helvetica Neue', 'Arial', sans-serif;
   font-size: 14px;
@@ -74,6 +136,22 @@
 
 .datepicker__month {
   font-size: 12px;
+}
+
+@media (min-width: 480px) {
+  .datepicker__months {
+    position: relative;
+  }
+  .datepicker__months:before {
+    background: #dcdcdc;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    width: 1px;
+  }
 }
 
 .datepicker__month-caption {
@@ -98,14 +176,12 @@
 }
 
 .datepicker__month-day {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 10px;
   color: #acb2c1;
-  padding: 9px 7px;
+  padding: 9px 4px;
 }
 
 .datepicker__month-day--no-check-in {
@@ -156,8 +232,7 @@
   color: red;
   font-size: 16px;
   top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .datepicker__month-day--day-of-week-disabled {
@@ -194,12 +269,9 @@
 }
 
 .datepicker__month-button {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #d6dae5;
   border-radius: 4px;
   color: #9da6b8;
@@ -247,17 +319,13 @@
 }
 
 .datepicker__close-button {
-  -webkit-transition-duration: 0.2s;
-          transition-duration: 0.2s;
-  -webkit-transition-property: color, background-color, border-color;
+  transition-duration: 0.2s;
   transition-property: color, background-color, border-color;
-  -webkit-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   background-color: #746bfd;
   border-radius: 4px;
   border: none;
-  -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   font-size: 10px;
   color: #fff;
   margin-top: 20px;
@@ -270,6 +338,15 @@
 .datepicker__close-button:hover {
   background-color: #484c55;
   color: #fff;
+}
+
+@media (min-width: 768px) {
+  .datepicker__close-button {
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 
 .datepicker__tooltip {
@@ -289,60 +366,4 @@
   left: 50%;
   margin-left: -4px;
   position: absolute;
-}
-
-@media (min-width: 320px) {
-  .datepicker {
-    width: 300px;
-  }
-}
-
-@media (min-width: 480px) {
-  .datepicker {
-    width: 460px;
-  }
-  .datepicker__months {
-    overflow: hidden;
-  }
-  .datepicker__month {
-    width: 200px;
-  }
-  .datepicker__month--month1 {
-    float: left;
-  }
-  .datepicker__month--month2 {
-    display: table;
-    float: right;
-  }
-  .datepicker__month-button--disabled {
-    visibility: hidden;
-  }
-  .datepicker__months {
-    position: relative;
-  }
-  .datepicker__months:before {
-    background: #dcdcdc;
-    bottom: 0;
-    content: '';
-    display: block;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    width: 1px;
-  }
-}
-
-@media (min-width: 768px) {
-  .datepicker {
-    width: 560px;
-  }
-  .datepicker__month {
-    width: 240px;
-  }
-  .datepicker__close-button {
-    margin-top: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
 }
