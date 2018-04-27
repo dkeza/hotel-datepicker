@@ -123,7 +123,7 @@
 .datepicker__month-day--checkout-enabled {}
 
 .datepicker__month-day--selected {
-	background-color: rgba($accent__color,.2);
+	background-color: rgba($accent__color,.5);
 	color: #fff;
 
 	&:after {
